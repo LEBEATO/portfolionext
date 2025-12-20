@@ -1,0 +1,7 @@
+# Permite que todos os robôs de busca rastreiem o site
+User-agent: *
+Allow: /
+
+# Aponta para o seu sitemap (mapa do site)
+# IMPORTANTE: Substitua "https://seusite.com" pelo seu domínio real
+Sitemap: https://seusite.com/sitemap.xml
