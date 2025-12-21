@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Alexandre Beato | Desenvolvedor Front-end",
     description: "Portfólio de um desenvolvedor front-end apaixonado por criar soluções web modernas e eficientes.",
-    url: "https://seusite.com", // IMPORTANTE: Substitua pelo seu domínio real
+    url: "https://portfolionext-knav.vercel.app", // IMPORTANTE: Substitua pelo seu domínio real
     siteName: "Portfólio Alexandre Beato",
     images: [
       {
