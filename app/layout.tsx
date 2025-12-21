@@ -58,7 +58,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  metadataBase: new URL("https://seusite.com"), // IMPORTANTE: Substitua pelo seu domínio real
+  metadataBase: new URL("https://portfolionext-knav.vercel.app"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
