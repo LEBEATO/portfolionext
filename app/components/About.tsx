@@ -1,30 +1,4 @@
-export function About() {
-  return (
-    <section
-      id="sobre"
-      className="bg-gray-950 text-white py-20 sm:py-24"
-    >
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-medium mb-6">Meu Perfil</h2>
-          <div className="text-gray-300 text-lg leading-relaxed space-y-6">
-            <p>
-              Olá! Sou Alexandre, um desenvolvedor apaixonado por criar
-              soluções web modernas e eficientes. Minha jornada na programação
-              começou com uma linha de código em um editor de texto, e desde
-              então, tenho me dedicado a aprender e aplicar as melhores
-              práticas do mercado.
-            </p>
-            <p>
-              Tenho experiência sólida com o ecossistema JavaScript,
-              especialmente com React, Next.js e TypeScript. Gosto de construir
-              interfaces de usuário que não sejam apenas bonitas, mas também
-              intuitivas e acessíveis. Estou sempre em busca de novos desafios e
-              oportunidades para crescer como desenvolvedor.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+import { Braces,Database,GraduationCap,ShieldCheck } from "lucide-react";
+import { Reveal } from "./Reveal";
+const values=[{icon:Braces,title:"Código sustentável",text:"Componentes reutilizáveis, TypeScript e arquitetura organizada."},{icon:Database,title:"Produto completo",text:"Do front-end ao banco de dados, com APIs e integrações reais."},{icon:ShieldCheck,title:"Segurança primeiro",text:"Autenticação, validação, permissões e proteção dos dados."}];
+export function About(){return <section id="sobre" className="section-space"><div className="container-shell grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:gap-20"><Reveal direction="left"><span className="eyebrow">Sobre mim</span><h2 className="section-title">Construo experiências que unem <span className="gradient-text">design e engenharia.</span></h2><div className="mt-8 flex items-center gap-4 rounded-2xl border border-purple-400/15 bg-purple-500/5 p-4"><GraduationCap className="shrink-0 text-purple-300"/><p className="text-sm leading-6 text-white/65">Tecnologia em Análise e Desenvolvimento de Sistemas — conclusão prevista para dezembro de 2026.</p></div></Reveal><Reveal direction="right" className="space-y-8"><p className="text-lg leading-8 text-white/70">Sou desenvolvedor Full Stack com foco no ecossistema JavaScript. Crio produtos responsivos com Next.js e React, integro back-ends, bancos de dados e autenticação e transformo necessidades de negócio em experiências claras para o usuário.</p><p className="leading-7 text-white/50">Meus projetos incluem gestão de frotas com segregação de dados, e-commerce integrado a APIs e experiências digitais voltadas a conversão. Busco uma oportunidade para contribuir, aprender rápido e evoluir junto com o time.</p><div className="grid gap-4 sm:grid-cols-3">{values.map(({icon:Icon,title,text})=><div key={title} className="glass rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-purple-400/30"><Icon className="text-purple-300" size={23}/><h3 className="mt-4 text-sm font-extrabold">{title}</h3><p className="mt-2 text-xs leading-5 text-white/45">{text}</p></div>)}</div></Reveal></div></section>}

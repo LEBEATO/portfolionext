@@ -1,42 +1,8 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import { Resend } from "resend";
 import sanitizeHtml from "sanitize-html";
-
-const schema = z.object({
-  name: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
-  email: z.string().email("Por favor, insira um email válido"),
-  message: z.string().min(10, "A mensagem deve ter pelo menos 10 caracteres"),
-});
-
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const validation = schema.safeParse(body);
-
-    if (!validation.success) {
-      // CORREÇÃO: Usamos 'issues' em vez de 'errors' para satisfazer o TypeScript
-      return NextResponse.json(
-        { error: validation.error.issues[0].message },
-        { status: 400 }
-      );
-    }
-
-    const { name, email, message } = validation.data;
-
-    const sanitizedMessage = sanitizeHtml(message, {
-      allowedTags: [], // Remove todas as tags HTML para segurança
-      allowedAttributes: {},
-    });
-
-    // Aqui você pode adicionar a lógica para enviar o email ou salvar no banco de dados
-    console.log("Mensagem recebida:", { name, email, sanitizedMessage });
-
-    return NextResponse.json({ message: "Mensagem enviada com sucesso!" });
-  } catch (error) {
-    console.error("Erro no formulário de contato:", error);
-    return NextResponse.json(
-      { error: "Ocorreu um erro ao enviar sua mensagem." },
-      { status: 500 }
-    );
-  }
+import { z } from "zod";
+const schema=z.object({name:z.string().trim().min(2).max(80),email:z.string().trim().email().max(120),message:z.string().trim().min(10).max(1500),company:z.string().max(0).optional()});
+export async function POST(request:Request){
+ try{const body=await request.json();const parsed=schema.safeParse(body);if(!parsed.success)return NextResponse.json({error:"Revise os campos e tente novamente."},{status:400});if(parsed.data.company)return NextResponse.json({message:"Mensagem recebida."});const apiKey=process.env.RESEND_API_KEY;const recipient=process.env.CONTACT_EMAIL;if(!apiKey||!recipient)return NextResponse.json({error:"O formulário está sendo configurado. Fale comigo pelo WhatsApp ou e-mail."},{status:503});const resend=new Resend(apiKey);const name=sanitizeHtml(parsed.data.name,{allowedTags:[],allowedAttributes:{}});const message=sanitizeHtml(parsed.data.message,{allowedTags:[],allowedAttributes:{}});const result=await resend.emails.send({from:process.env.CONTACT_FROM_EMAIL||"Portfólio <onboarding@resend.dev>",to:recipient,replyTo:parsed.data.email,subject:`Novo contato do portfólio — ${name}`,text:`Nome: ${name}\nE-mail: ${parsed.data.email}\n\n${message}`});if(result.error)throw new Error(result.error.message);return NextResponse.json({message:"Mensagem enviada."})}catch{return NextResponse.json({error:"Não foi possível enviar agora. Tente o WhatsApp ou e-mail."},{status:500})}
 }

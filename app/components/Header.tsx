@@ -1,62 +1,14 @@
 "use client";
-
-import { useState } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Menu, X } from "lucide-react";
-
-export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navLinks = [
-    { href: "#sobre", label: "PERFIL |" },
-    { href: "#projetos", label: "PROJETOS |" },
-    { href: "#habilidades", label: "SKILLS |" },
-    { href: "#contato", label: "CONTATO |" },
-  ];
-
-  return (
-    <header className="bg-gray-950 backdrop-blur-lg shadow-2xl text-white p-4 sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-xl font-bold">DEV <span className="text-amber-300 font-medium"> ALEXANDRE</span></h1>
-
-        {/* Navegação para telas grandes */}
-        <nav className="hidden md:flex items-center font-medium gap-6">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-gray-300 hover:text-gray-300 transition-colors">
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-4">
-          <a href="https://github.com/LEBEATO" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="GitHub">
-            <FaGithub size={22} />
-          </a>
-          <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
-            <FaLinkedin size={22} />
-          </a>
-        </div>
-
-        {/* Botão do menu para telas pequenas */}
-        <div className="md:hidden">
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Abrir menu">
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Menu móvel */}
-      {isMenuOpen && (
-        <div className="md:hidden mt-4 bg-gray-900 rounded-lg p-4">
-          <nav className="flex flex-col items-center gap-4">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-gray-300 hover:text-white transition-colors w-full text-center py-2">
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
-  );
+import { useEffect,useState } from "react";
+import { Github,Linkedin,Menu,X } from "lucide-react";
+const links=[{href:"#sobre",label:"Sobre"},{href:"#projetos",label:"Projetos"},{href:"#habilidades",label:"Stack"},{href:"#contato",label:"Contato"}];
+export function Header(){
+ const [open,setOpen]=useState(false); const [scrolled,setScrolled]=useState(false);
+ useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>16);onScroll();window.addEventListener("scroll",onScroll,{passive:true});return()=>window.removeEventListener("scroll",onScroll)},[]);
+ return <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${scrolled?"border-white/10 bg-[#07050d]/80 py-3 shadow-2xl shadow-purple-950/20 backdrop-blur-xl":"border-transparent bg-transparent py-5"}`}><div className="container-shell flex items-center justify-between">
+  <a href="#inicio" className="group flex items-center gap-3" aria-label="Ir para o início"><span className="grid size-10 place-items-center rounded-xl border border-purple-400/30 bg-purple-500/10 font-extrabold text-purple-300 transition group-hover:bg-purple-500/20">AB</span><span className="hidden text-sm font-bold tracking-wide text-white sm:block">Alexandre Beato</span></a>
+  <nav className="hidden items-center gap-8 md:flex" aria-label="Navegação principal">{links.map(link=><a key={link.href} href={link.href} className="text-sm font-semibold text-white/65 transition hover:text-white">{link.label}</a>)}</nav>
+  <div className="hidden items-center gap-2 md:flex"><a href="https://github.com/LEBEATO" target="_blank" rel="noreferrer" aria-label="GitHub de Alexandre" className="rounded-lg p-2 text-white/60 transition hover:bg-white/5 hover:text-white"><Github size={19}/></a><a href="https://www.linkedin.com/in/alexandre-beato-451926190" target="_blank" rel="noreferrer" aria-label="LinkedIn de Alexandre" className="rounded-lg p-2 text-white/60 transition hover:bg-white/5 hover:text-white"><Linkedin size={19}/></a><a href="#contato" className="ml-2 rounded-xl bg-white px-4 py-2 text-sm font-extrabold text-[#0b0811] transition hover:bg-purple-100">Vamos conversar</a></div>
+  <button type="button" onClick={()=>setOpen(v=>!v)} className="rounded-xl border border-white/10 p-2 text-white md:hidden" aria-expanded={open} aria-controls="mobile-menu" aria-label={open?"Fechar menu":"Abrir menu"}>{open?<X/>:<Menu/>}</button>
+ </div>{open&&<nav id="mobile-menu" className="container-shell mt-3 grid gap-1 rounded-2xl border border-white/10 bg-[#100c1a]/95 p-3 shadow-2xl backdrop-blur-xl md:hidden" aria-label="Navegação mobile">{links.map(link=><a key={link.href} href={link.href} onClick={()=>setOpen(false)} className="rounded-xl px-4 py-3 font-semibold text-white/75 hover:bg-white/5 hover:text-white">{link.label}</a>)}</nav>}</header>;
 }
