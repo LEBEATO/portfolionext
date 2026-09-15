@@ -1,77 +1,9 @@
 "use client";
-
-import { useState } from "react";
-import { FaPaperPlane } from "react-icons/fa";
-
-export function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus("");
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      if (response.ok) {
-        setStatus("Mensagem enviada com sucesso!");
-        setName("");
-        setEmail("");
-        setMessage("");
-      } else {
-        const errorData = await response.json();
-        setStatus(`Falha ao enviar: ${errorData.error || "Tente novamente."}`);
-      }
-    } catch (error) {
-      setStatus("Ocorreu um erro. Tente novamente mais tarde.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <section
-      id="contato"
-      className="bg-gray-950 text-white py-20 sm:py-24"
-    >
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-medium text-center mb-4">
-          Entre em Contato
-        </h2>
-        <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-          Tem alguma pergunta ou proposta? Sinta-se à vontade para me enviar uma mensagem.
-        </p>
-        <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Nome</label>
-            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-cyan-500 focus:border-cyan-500 transition"/>
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-cyan-500 focus:border-cyan-500 transition"/>
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Mensagem</label>
-            <textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} required rows={5} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-cyan-500 focus:border-cyan-500 transition"></textarea>
-          </div>
-          <div className="text-center">
-            <button type="submit" disabled={loading} className="inline-flex items-center gap-3 bg-cyan-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-cyan-400 transition-all transform hover:scale-105 disabled:bg-gray-600 disabled:cursor-not-allowed">
-              {loading ? "Enviando..." : "Enviar Mensagem"}
-              {!loading && <FaPaperPlane />}
-            </button>
-          </div>
-          {status && <p className={`text-center mt-4 ${status.includes("sucesso") ? "text-green-400" : "text-red-400"}`}>{status}</p>}
-        </form>
-      </div>
-    </section>
-  );
-}
+import { FormEvent,useState } from "react";
+import { Github,Linkedin,LoaderCircle,Mail,MapPin,MessageCircle,Send } from "lucide-react";
+import { Reveal } from "./Reveal";
+type State={type:"idle"|"success"|"error";message:string};
+export function Contact(){
+ const [state,setState]=useState<State>({type:"idle",message:""}); const [loading,setLoading]=useState(false);
+ async function submit(event:FormEvent<HTMLFormElement>){event.preventDefault();setLoading(true);setState({type:"idle",message:""});const form=event.currentTarget;const data=Object.fromEntries(new FormData(form));try{const response=await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});const result=await response.json();if(!response.ok)throw new Error(result.error||"Não foi possível enviar.");form.reset();setState({type:"success",message:"Mensagem enviada! Responderei assim que possível."})}catch(error){setState({type:"error",message:error instanceof Error?error.message:"Não foi possível enviar agora."})}finally{setLoading(false)}}
+ return <section id="contato" className="section-space relative"><div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"/><div className="container-shell grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20"><Reveal direction="left"><span className="eyebrow">Contato</span><h2 className="section-title">Vamos construir algo <span className="gradient-text">relevante juntos?</span></h2><p className="mt-6 max-w-lg leading-7 text-white/55">Estou disponível para oportunidades como desenvolvedor Full Stack, projetos e conversas sobre tecnologia.</p><div className="mt-9 grid gap-3 text-sm"><a href="mailto:beatoalex936@gmail.com" className="flex items-center gap-3 text-white/65 transition hover:text-white"><Mail size={18} className="text-purple-300"/>beatoalex936@gmail.com</a><a href="https://wa.me/5535992640014" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-white/65 transition hover:text-white"><MessageCircle size={18} className="text-purple-300"/>WhatsApp</a><span className="flex items-center gap-3 text-white/65"><MapPin size={18} className="text-purple-300"/>Poços de Caldas, Minas Gerais</span></div><div className="mt-8 flex gap-3"><a href="https://github.com/LEBEATO" target="_blank" rel="noreferrer" aria-label="GitHub" className="rounded-xl border border-white/10 p-3 text-white/60 transition hover:-translate-y-1 hover:text-white"><Github/></a><a href="https://www.linkedin.com/in/alexandre-beato-451926190" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="rounded-xl border border-white/10 p-3 text-white/60 transition hover:-translate-y-1 hover:text-white"><Linkedin/></a></div></Reveal><Reveal direction="right"><form onSubmit={submit} className="glass rounded-[2rem] p-6 sm:p-8"><div className="grid gap-5 sm:grid-cols-2"><label className="grid gap-2 text-sm font-bold text-white/75">Nome<input name="name" required minLength={2} maxLength={80} autoComplete="name" placeholder="Seu nome" className="rounded-xl border border-white/10 bg-white/[.035] px-4 py-3.5 font-normal text-white placeholder:text-white/25 transition focus:border-purple-400"/></label><label className="grid gap-2 text-sm font-bold text-white/75">E-mail<input name="email" type="email" required maxLength={120} autoComplete="email" placeholder="seu@email.com" className="rounded-xl border border-white/10 bg-white/[.035] px-4 py-3.5 font-normal text-white placeholder:text-white/25 transition focus:border-purple-400"/></label></div><label className="mt-5 grid gap-2 text-sm font-bold text-white/75">Mensagem<textarea name="message" required minLength={10} maxLength={1500} rows={6} placeholder="Conte um pouco sobre a oportunidade ou projeto..." className="resize-none rounded-xl border border-white/10 bg-white/[.035] px-4 py-3.5 font-normal text-white placeholder:text-white/25 transition focus:border-purple-400"/></label><label className="sr-only" aria-hidden="true">Empresa<input name="company" tabIndex={-1} autoComplete="off"/></label><div className="mt-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"><p aria-live="polite" className={`text-sm ${state.type==="success"?"text-emerald-300":"text-rose-300"}`}>{state.message}</p><button disabled={loading} className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-purple-500 px-5 py-3 text-sm font-extrabold transition hover:bg-purple-400 disabled:cursor-not-allowed disabled:opacity-60">{loading?<LoaderCircle className="animate-spin" size={18}/>:<Send size={18}/>} {loading?"Enviando...":"Enviar mensagem"}</button></div></form></Reveal></div></section>}

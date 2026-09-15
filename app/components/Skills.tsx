@@ -1,56 +1,6 @@
 "use client";
-import {
-  FaReact,
-  FaNodeJs,
-  FaHtml5,
-  FaCss3Alt,
-  FaGitAlt,
-  FaDocker,
-} from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTailwindcss,
-  SiTypescript,
-  SiJavascript,
-  SiPrisma,
-} from "react-icons/si";
-
-const skills = [
-  { name: "React", icon: <FaReact className="text-cyan-400" /> },
-  { name: "Next.js", icon: <SiNextdotjs /> },
-  { name: "TypeScript", icon: <SiTypescript className="text-blue-500" /> },
-  { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-  { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-400" /> },
-  { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
-  { name: "HTML5", icon: <FaHtml5 className="text-orange-500" /> },
-  { name: "CSS3", icon: <FaCss3Alt className="text-blue-600" /> },
-  { name: "Git", icon: <FaGitAlt className="text-red-500" /> },
-  { name: "Prisma", icon: <SiPrisma className="text-gray-300" /> },
-  { name: "Docker", icon: <FaDocker className="text-blue-500" /> },
-];
-
-export function Skills() {
-  return (
-    <section
-      id="habilidades"
-      className="bg-gray-950 text-white py-20 sm:py-24"
-    >
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-medium text-center mb-4">
-          Minhas Habilidades
-        </h2>
-        <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-          Tecnologias e ferramentas com as quais tenho experiência.
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 max-w-4xl mx-auto">
-          {skills.map((skill) => (
-            <div key={skill.name} className="flex flex-col items-center justify-center gap-2 p-4 bg-gray-900/50 rounded-lg transition-transform hover:-translate-y-2">
-              <div className="text-5xl">{skill.icon}</div>
-              <p className="font-medium">{skill.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+import { motion,useReducedMotion } from "motion/react";
+import { Braces,CloudCog,Database,LayoutTemplate } from "lucide-react";
+import { Reveal } from "./Reveal";
+const groups=[{icon:LayoutTemplate,title:"Front-end",items:["React","Next.js","TypeScript","JavaScript","Tailwind CSS","HTML & CSS"]},{icon:Braces,title:"Back-end",items:["Node.js","APIs REST","Server Actions","Autenticação","Validação","Prisma ORM"]},{icon:Database,title:"Dados",items:["Supabase","PostgreSQL","Neon","RLS","Modelagem","SQL"]},{icon:CloudCog,title:"Ferramentas",items:["Git & GitHub","Vercel","Docker","VS Code","Figma","Metodologias ágeis"]}];
+export function Skills(){const reduce=useReducedMotion();return <section id="habilidades" className="section-space"><div className="container-shell"><Reveal><span className="eyebrow">Conhecimentos</span><h2 className="section-title max-w-2xl">Minha stack para criar do <span className="gradient-text">front ao deploy.</span></h2></Reveal><div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">{groups.map(({icon:Icon,title,items},index)=><motion.article key={title} initial={reduce?false:{opacity:0,x:index%2===0?-32:32}} whileInView={{opacity:1,x:0}} viewport={{once:true,amount:.2}} transition={{duration:.6,delay:index*.08,ease:[.22,1,.36,1]}} className="glass rounded-3xl p-6 transition duration-300 hover:-translate-y-2 hover:border-purple-400/30"><span className="grid size-11 place-items-center rounded-xl bg-purple-500/10 text-purple-300"><Icon size={22}/></span><h3 className="mt-5 text-lg font-extrabold">{title}</h3><div className="mt-5 flex flex-wrap gap-2">{items.map((item,itemIndex)=><motion.span key={item} initial={reduce?false:{opacity:0,y:8}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:.15+itemIndex*.045}} className="rounded-lg border border-white/8 bg-white/[.035] px-3 py-2 text-xs font-semibold text-white/55">{item}</motion.span>)}</div></motion.article>)}</div></div></section>}

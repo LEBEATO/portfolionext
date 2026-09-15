@@ -1,51 +1,8 @@
-"use client";
 import { ProjectCard } from "./ProjectCard";
-
-const projectsData = [
-  {
-    title: "Fortinate Shopp",
-    description: "Porjeto fortnite shopp desenvolvido com APi e Prisma com Neon.",
-    imageUrl: "/project1.jpg", // Coloque a imagem em /public/project1.jpg
-    tags: ["Prisma","Neon", "Next.js", "Tailwind CSS","Typescript"],
-    githubUrl: "https://github.com/LEBEATO/fortinate-shopp.git",
-    liveUrl: "https://fortinate-shopp.vercel.app",
-  },
-  {
-    title: "Projeto Exemplo 2",
-    description: "Uma breve descrição do que este projeto faz, os desafios e as tecnologias usadas.",
-    imageUrl: "/project2.jpg", // Coloque a imagem em /public/project2.jpg
-    tags: ["TypeScript", "Node.js", "Express"],
-    githubUrl: "https://github.com/seu-usuario/projeto-2",
-  },
-   {
-    title: "Projeto Exemplo 3",
-    description: "Uma breve descrição do que este projeto faz, os desafios e as tecnologias usadas.",
-    imageUrl: "/project2.jpg", // Coloque a imagem em /public/project2.jpg
-    tags: ["TypeScript", "Node.js", "Express"],
-    githubUrl: "https://github.com/seu-usuario/projeto-2",
-  },
-  // Adicione mais projetos aqui
+import { Reveal } from "./Reveal";
+const projects=[
+ {index:"01",title:"FrotaPro",variant:"fleet" as const,description:"Plataforma de gestão de frotas criada para operações com múltiplos estados e bases, conectando gestores, unidades e motoristas.",highlights:["Acesso por papéis e segregação de dados por unidade","Checklist diário, combustível e manutenção","Supabase Auth, banco Postgres e políticas RLS"],tags:["Next.js","TypeScript","Supabase","PostgreSQL","Tailwind CSS"],githubUrl:"https://github.com/LEBEATO/frotapro",liveUrl:"https://frotapro.vercel.app"},
+ {index:"02",title:"Loja Pets",variant:"pets" as const,description:"Experiência de e-commerce responsiva para o mercado pet, com navegação clara, catálogo visual e foco em conversão.",highlights:["Interface moderna adaptada para celular","Componentes reutilizáveis e navegação intuitiva","Experiência visual com microinterações"],tags:["Next.js","React","TypeScript","Tailwind CSS"],githubUrl:"https://github.com/LEBEATO/lojapets",liveUrl:"https://lojapets-lebeatos-projects.vercel.app"},
+ {index:"03",title:"Fortinat Shop",variant:"shop" as const,description:"Loja de cosméticos inspirada no universo Fortnite, integrada a uma API externa e preparada para compras, histórico e coleção do usuário.",highlights:["Catálogo consumido de API externa","Persistência com Prisma e Neon PostgreSQL","Filtros, autenticação e experiência de compra"],tags:["Next.js","Prisma","Neon","API REST","TypeScript"],githubUrl:"https://github.com/LEBEATO/fortinate-shopp",liveUrl:"https://fortinate-shopp.vercel.app"},
 ];
-
-export function Projects() {
-  return (
-    <section
-      id="projetos"
-      className="bg-gray-950 text-white py-20 sm:py-24"
-    >
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-semibold text-center mb-4">
-          Meus Projetos
-        </h2>
-        <p className="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-          Aqui estão alguns dos projetos em que trabalhei recentemente.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+export function Projects(){return <section id="projetos" className="section-space relative"><div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"/><div className="container-shell"><Reveal><span className="eyebrow">Trabalhos selecionados</span><div className="mt-3 flex flex-col justify-between gap-5 md:flex-row md:items-end"><h2 className="section-title max-w-2xl">Projetos que resolvem <span className="gradient-text">problemas reais.</span></h2><p className="max-w-md leading-7 text-white/50">Produtos completos que demonstram interface, regras de negócio, integração e banco de dados.</p></div></Reveal><div className="mt-14 grid gap-7">{projects.map(project=><ProjectCard key={project.title} {...project}/>)}</div></div></section>}

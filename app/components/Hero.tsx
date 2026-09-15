@@ -1,69 +1,18 @@
-'use client'
-import { useEffect, useRef } from "react";
+"use client";
 import Image from "next/image";
-import { FaArrowRight } from "react-icons/fa";
-import { splitText } from "motion-plus";
-import { animate, stagger } from "motion";
-
-export function Hero() {
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    if (titleRef.current) {
-      const { chars } = splitText(titleRef.current);
-      animate(
-        chars,
-        { color: ["#c1f3a4", "#54f315"], opacity: [0, 1] } as any,
-        { duration: 0.9, delay: stagger(0.06), repeat: Infinity, repeatDelay: 1, direction: "alternate" } as any
-      );
-    }
-
-    if (textRef.current) {
-      const { words } = splitText(textRef.current);
-      animate(
-        words,
-        { opacity: [0, 1], y: [20, 0] },
-        { duration: 0.8, delay: stagger(0.05) }
-      );
-    }
-  }, []);
-
-  return (
-    <section className="bg-gray-950 text-white py-24 sm:py-32">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center px-4">
-        {/* Imagem - use uma imagem sua na pasta /public */}
-        <div className="relative flex-shrink-0 mb-10 md:mb-0 md:mr-12">
-          {/* Efeito de brilho ao redor da imagem */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full blur opacity-75"></div>
-          <Image
-            src="/foto.jpg" // Caminho da sua foto na pasta /public
-            alt="Foto de perfil"
-            width={200}
-            height={200}
-            className="relative rounded-2xl border-4 border-gray-800 shadow-lg"
-            priority
-          />
-        </div>
-
-        {/* Texto */}
-        <div className="text-center md:text-left">
-          <h2 ref={titleRef} className="text-4xl sm:text-5xl font-semibold mb-3">Alexandre Beato</h2>
-          <h3 className="text-xl sm:text-2xl text-cyan-400 mb-6 font-medium">
-            Desenvolvedor Front-end | React | Next.js
-          </h3>
-          <p ref={textRef} className="text-lg text-gray-300 max-w-xl leading-relaxed mb-8">
-           Sou desenvolvedor em formação, altamente motivado por tecnologia e por desafios que exigem aprendizado contínuo. Tenho foco em desenvolvimento web moderno, aplicando boas práticas, organização de código e atenção à experiência do usuário
-          </p>
-          <a
-            href="#projetos" // Link para a futura seção de projetos
-            className="inline-flex items-center gap-2 bg-cyan-500 text-gray-900 font-bold py-3 px-6 rounded-lg hover:bg-cyan-400 transition-all transform hover:scale-105"
-          >
-            Ver meus projetos
-            <FaArrowRight />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
+import { motion,useReducedMotion } from "motion/react";
+import { ArrowDownRight,Code2,Github,Linkedin,MapPin } from "lucide-react";
+const words=["Full Stack","Next.js","React","TypeScript"];
+export function Hero(){
+ const reduce=useReducedMotion();
+ return <section id="inicio" className="relative min-h-screen overflow-hidden pt-28"><div className="grid-glow absolute inset-0 -z-10"/><div className="absolute left-[8%] top-32 -z-10 size-72 rounded-full bg-purple-600/15 blur-[110px]"/><div className="container-shell grid min-h-[calc(100vh-7rem)] items-center gap-14 py-16 lg:grid-cols-[1.15fr_.85fr]">
+  <div><motion.div initial={reduce?false:{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:.6}} className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1.5 text-xs font-bold text-emerald-300"><span className="size-2 animate-pulse rounded-full bg-emerald-400"/>Disponível para oportunidades</motion.div>
+   <motion.p initial={reduce?false:{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.65,delay:.08}} className="mb-4 text-sm font-extrabold uppercase tracking-[.2em] text-purple-300">Olá, eu sou Alexandre Beato</motion.p>
+   <motion.h1 initial={reduce?false:{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{duration:.75,delay:.16,ease:[.22,1,.36,1]}} className="max-w-4xl text-[clamp(3rem,8vw,6.6rem)] font-extrabold leading-[.94] tracking-[-.065em]">Desenvolvedor <span className="gradient-text">Full Stack</span></motion.h1>
+   <motion.p initial={reduce?false:{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.28}} className="mt-7 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">Transformo ideias em aplicações web rápidas, seguras e fáceis de usar, unindo interfaces modernas, APIs e bancos de dados preparados para problemas reais.</motion.p>
+   <motion.div initial={reduce?false:{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:.36}} className="mt-9 flex flex-wrap gap-3"><a href="#projetos" className="inline-flex items-center gap-2 rounded-xl bg-purple-500 px-5 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-purple-600/20 transition hover:-translate-y-1 hover:bg-purple-400">Explorar projetos <ArrowDownRight size={18}/></a><a href="#contato" className="inline-flex items-center gap-2 rounded-xl border border-white/12 bg-white/5 px-5 py-3.5 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-white/10">Entrar em contato</a></motion.div>
+   <motion.div initial={reduce?false:{opacity:0}} animate={{opacity:1}} transition={{delay:.52}} className="mt-9 flex flex-wrap items-center gap-5 text-sm text-white/50"><span className="flex items-center gap-2"><MapPin size={16}/>Poços de Caldas, MG</span><a href="https://github.com/LEBEATO" target="_blank" rel="noreferrer" className="flex items-center gap-2 transition hover:text-white"><Github size={17}/>GitHub</a><a href="https://www.linkedin.com/in/alexandre-beato-451926190" target="_blank" rel="noreferrer" className="flex items-center gap-2 transition hover:text-white"><Linkedin size={17}/>LinkedIn</a></motion.div>
+  </div>
+  <motion.div initial={reduce?false:{opacity:0,scale:.9,x:35}} animate={{opacity:1,scale:1,x:0}} transition={{duration:.9,delay:.22,ease:[.22,1,.36,1]}} className="relative mx-auto w-full max-w-md"><div className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-purple-500/25 to-cyan-400/10 blur-3xl"/><div className="glass relative overflow-hidden rounded-[2rem] p-3"><div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent"/><Image src="/foto.jpg" alt="Alexandre Beato, desenvolvedor Full Stack" width={512} height={620} priority sizes="(max-width: 1024px) 90vw, 420px" className="aspect-[4/5] w-full rounded-[1.45rem] object-cover object-top grayscale-[15%]"/><div className="absolute bottom-7 left-7 right-7 rounded-2xl border border-white/10 bg-[#09060f]/80 p-4 backdrop-blur-xl"><div className="flex items-center gap-3"><span className="grid size-11 place-items-center rounded-xl bg-purple-500/15 text-purple-300"><Code2/></span><div><p className="text-sm font-extrabold">Tecnologia com propósito</p><p className="mt-1 text-xs text-white/50">{words.join(" · ")}</p></div></div></div></div></motion.div>
+ </div></section>;
 }

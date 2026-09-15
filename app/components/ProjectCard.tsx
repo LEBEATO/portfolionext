@@ -1,59 +1,6 @@
-import Image from "next/image";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { motion } from "framer-motion";
-
-type ProjectCardProps = {
-  title: string;
-  description: string;
-  imageUrl: string;
-  tags: string[];
-  githubUrl: string;
-  liveUrl?: string;
-};
-
-export function ProjectCard({
-  title,
-  description,
-  imageUrl,
-  tags,
-  githubUrl,
-  liveUrl,
-}: ProjectCardProps) {
-  return (
-    <motion.div
-      className="group bg-gray-950 rounded-lg overflow-hidden shadow-lg hover:shadow-cyan-500/20 transition-all duration-300"
-      whileHover={{ y: -8 }}
-      transition={{ type: "spring", stiffness: 300 }}
-    >
-      <Image
-        src={imageUrl}
-        alt={`Imagem do projeto ${title}`}
-        width={400}
-        height={250}
-        className=" w-full h-[330px] sm:h-[220px] md:h-[330px] object-cover"
-      
-      />
-      <div className="p-6">
-        <h3 className="text-2xl font-bold mb-2 text-white transition-colors group-hover:text-cyan-400">{title}</h3>
-        <p className="text-gray-400 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag) => (
-            <span key={tag} className="bg-cyan-900/50 text-cyan-300 text-sm font-medium px-2.5 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <div className="flex items-center gap-4 mt-6">
-          <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center gap-2">
-            <FaGithub size={20} /> Código
-          </a>
-          {liveUrl && (
-            <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center gap-2">
-              <FaExternalLinkAlt size={18} /> Demo
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+"use client";
+import { motion,useReducedMotion } from "motion/react";
+import { ArrowUpRight,Github } from "lucide-react";
+import { ProjectPreview } from "./ProjectPreview";
+type Props={index:string;title:string;description:string;highlights:string[];tags:string[];githubUrl:string;liveUrl:string;variant:"fleet"|"pets"|"shop"};
+export function ProjectCard({index,title,description,highlights,tags,githubUrl,liveUrl,variant}:Props){const reduce=useReducedMotion();return <motion.article initial={reduce?false:{opacity:0,y:42}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}} transition={{duration:.7,ease:[.22,1,.36,1]}} className="group glass grid overflow-hidden rounded-[2rem] lg:grid-cols-[1.05fr_.95fr]"><div className="overflow-hidden lg:order-2"><motion.div whileHover={reduce?undefined:{scale:1.025}} transition={{duration:.45}} className="h-full"><ProjectPreview variant={variant}/></motion.div></div><div className="flex flex-col p-6 sm:p-8 lg:order-1 lg:p-10"><span className="text-xs font-extrabold tracking-[.2em] text-purple-300">PROJETO {index}</span><h3 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h3><p className="mt-4 leading-7 text-white/55">{description}</p><ul className="mt-6 grid gap-2 text-sm text-white/70">{highlights.map(item=><li key={item} className="flex gap-3"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-cyan-300"/>{item}</li>)}</ul><div className="mt-7 flex flex-wrap gap-2">{tags.map(tag=><span key={tag} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-white/60">{tag}</span>)}</div><div className="mt-8 flex flex-wrap gap-3"><a href={liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-extrabold text-[#0b0811] transition hover:bg-purple-100">Ver projeto <ArrowUpRight size={17}/></a><a href={githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2.5 text-sm font-bold text-white/70 transition hover:bg-white/5 hover:text-white"><Github size={17}/>Código</a></div></div></motion.article>}

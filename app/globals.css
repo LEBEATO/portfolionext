@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+:root { --background:#07050d; --foreground:#f7f4ff; --muted:#aaa2ba; --primary:#a855f7; --primary-light:#d8b4fe; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body { margin:0; color:var(--foreground); background:radial-gradient(circle at 15% 10%,rgba(126,34,206,.14),transparent 28rem),radial-gradient(circle at 85% 30%,rgba(34,211,238,.08),transparent 26rem),var(--background); font-family:Manrope,Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+::selection { background:rgba(168,85,247,.45); color:white; }
+a,button,input,textarea { outline-offset:4px; }
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible { outline:2px solid var(--primary-light); }
+.container-shell { width:min(1180px,calc(100% - 2rem)); margin-inline:auto; }
+.section-space { padding-block:clamp(5rem,9vw,8rem); }
+.glass { background:linear-gradient(145deg,rgba(23,17,35,.82),rgba(10,8,17,.68)); border:1px solid rgba(255,255,255,.09); box-shadow:0 24px 80px rgba(0,0,0,.22); backdrop-filter:blur(18px); }
+.eyebrow { display:inline-flex; align-items:center; gap:.55rem; color:var(--primary-light); font-size:.78rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+.eyebrow::before { content:""; width:1.75rem; height:1px; background:currentColor; }
+.section-title { margin-top:.8rem; font-size:clamp(2rem,5vw,3.5rem); line-height:1.08; font-weight:800; letter-spacing:-.045em; }
+.gradient-text { color:transparent; background:linear-gradient(100deg,#f5e9ff 10%,#c084fc 45%,#22d3ee 95%); background-clip:text; -webkit-background-clip:text; }
+.grid-glow { background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:54px 54px; mask-image:linear-gradient(to bottom,black,transparent 88%); }
+.noise { position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.035; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
+@media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important} }
