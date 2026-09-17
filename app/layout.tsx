@@ -11,8 +11,8 @@ export const metadata:Metadata = {
   description:"Portfólio de Alexandre Beato, desenvolvedor Full Stack especializado em Next.js, React, TypeScript, Node.js e Supabase.",
   keywords:["Desenvolvedor Full Stack","Next.js","React","TypeScript","Node.js","Supabase","Alexandre Beato"],
   authors:[{name:"Alexandre Beato",url:"https://github.com/LEBEATO"}], alternates:{canonical:"/"},
-  openGraph:{title:"Alexandre Beato | Desenvolvedor Full Stack",description:"Aplicações web modernas, seguras e orientadas a resultados.",url:siteUrl,siteName:"Portfólio Alexandre Beato",images:[{url:"/portifolio.jpg",width:1200,height:630,alt:"Portfólio de Alexandre Beato"}],locale:"pt_BR",type:"website"},
-  twitter:{card:"summary_large_image",title:"Alexandre Beato | Desenvolvedor Full Stack",description:"Aplicações web modernas, seguras e orientadas a resultados.",images:["/portifolio.jpg"]}, robots:{index:true,follow:true},
+  openGraph:{title:"Alexandre Beato | Desenvolvedor Full Stack",description:"Aplicações web modernas, seguras e orientadas a resultados.",url:siteUrl,siteName:"Portfólio Alexandre Beato",locale:"pt_BR",type:"website"},
+  twitter:{card:"summary_large_image",title:"Alexandre Beato | Desenvolvedor Full Stack",description:"Aplicações web modernas, seguras e orientadas a resultados."}, robots:{index:true,follow:true},
 };
 export const viewport:Viewport = { colorScheme:"dark light", themeColor:[{media:"(prefers-color-scheme: dark)",color:"#07050d"},{media:"(prefers-color-scheme: light)",color:"#f7f5fb"}] };
 const themeScript = `(function(){try{var saved=localStorage.getItem('portfolio-theme');var theme=saved==='light'||saved==='dark'?saved:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme}catch(e){document.documentElement.dataset.theme='dark'}})()`;
