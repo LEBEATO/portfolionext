@@ -20,4 +20,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible 
 .hero-word { display:inline-block; white-space:nowrap; }
 .hero-portrait,.hero-orb,.project-preview,.skill-card,.gsap-reveal { will-change:transform,opacity; }
 .project-preview { transform-style:preserve-3d; perspective:1000px; }
+.motion-button,.motion-button-icon,.motion-button-glow { will-change:transform,opacity; }
+.motion-button { touch-action:manipulation; }
 @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important} }

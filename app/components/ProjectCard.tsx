@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, Github } from "lucide-react";
 import { ProjectPreview } from "./ProjectPreview";
+import { MotionLink } from "./MotionButton";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -98,7 +99,7 @@ export function ProjectCard({ index, title, description, highlights, tags, githu
         <p className="mt-4 leading-7 text-white/55">{description}</p>
         <ul className="mt-6 grid gap-2 text-sm text-white/70">{highlights.map((item) => <li key={item} className="flex gap-3"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-cyan-300" />{item}</li>)}</ul>
         <div className="mt-7 flex flex-wrap gap-2">{tags.map((tag) => <span key={tag} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-white/60">{tag}</span>)}</div>
-        <div className="mt-8 flex flex-wrap gap-3"><a href={liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-extrabold text-[#0b0811] transition hover:bg-purple-100">Ver projeto <ArrowUpRight size={17} /></a><a href={githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2.5 text-sm font-bold text-white/70 transition hover:bg-white/5 hover:text-white"><Github size={17} />Código</a></div>
+        <div className="mt-8 flex flex-wrap gap-3"><MotionLink href={liveUrl} target="_blank" rel="noreferrer" icon={<ArrowUpRight size={17} />} className="inline-flex items-center gap-2 overflow-hidden rounded-xl bg-white px-4 py-2.5 text-sm font-extrabold text-[#0b0811]">Ver projeto</MotionLink><MotionLink href={githubUrl} target="_blank" rel="noreferrer" icon={<Github size={17} />} iconPosition="start" className="inline-flex items-center gap-2 overflow-hidden rounded-xl border border-white/10 px-4 py-2.5 text-sm font-bold text-white/70">Código</MotionLink></div>
       </div>
     </article>
   );
