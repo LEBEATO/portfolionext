@@ -10,10 +10,10 @@ import { Reveal } from "./Reveal";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const groups = [
-  { icon: LayoutTemplate, title: "Front-end", items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML & CSS"] },
-  { icon: Braces, title: "Back-end", items: ["Node.js", "APIs REST", "Server Actions", "Autenticação", "Validação", "Prisma ORM"] },
+  { icon: LayoutTemplate, title: "Front-end", items: ["React", "Next.js", "Vite", "TypeScript", "JavaScript", "Tailwind CSS", "HTML & CSS"] },
+  { icon: Braces, title: "Back-end", items: ["Node.js", "NestJS", "APIs REST", "Server Actions", "Autenticação", "Zod", "Prisma ORM"] },
   { icon: Database, title: "Dados", items: ["Supabase", "PostgreSQL", "Neon", "RLS", "Modelagem", "SQL"] },
-  { icon: CloudCog, title: "Ferramentas", items: ["Git & GitHub", "Vercel", "Docker", "VS Code", "Figma", "Metodologias ágeis"] },
+  { icon: CloudCog, title: "Ferramentas", items: ["Git & GitHub", "Vercel", "VS Code", "npm", "WhatsApp", "Metodologias ágeis"] },
 ];
 
 export function Skills() {
