@@ -18,7 +18,7 @@ type Props = {
   tags: string[];
   githubUrl: string;
   liveUrl: string;
-  variant: "fleet" | "pets" | "shop" | "menu";
+  variant: "fleet" | "pets" | "shop" | "menu" | "ai";
 };
 
 export function ProjectCard({ index, title, description, highlights, tags, githubUrl, liveUrl, variant }: Props) {
